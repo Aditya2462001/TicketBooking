@@ -8,7 +8,7 @@ router.post('/', async (req, res) => {
     try {
         const ticket = new Ticket(req.body);
         await ticket.save();
-        res.status(201).json({ ticket:ticket,message: 'Ticket is created successfully' });
+        res.status(201).json({ message: 'Ticket is created successfully' });
     } catch (err) {
         res.status(500).json({ message: err.message });
     }

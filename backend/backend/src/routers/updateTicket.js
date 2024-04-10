@@ -6,7 +6,7 @@ const router = express.Router();
 
 router.put('/:id',async (req,res) =>{
     try{
-        const data = await Ticket.findByIdAndUpdate(req.params.id,{userId:req.body.userId,booked:true},{ new: true });
+        const data = await Ticket.findByIdAndUpdate(req.params.id,{user:req.body.userId,booked:true},{ new: true });
         if(!data) throw Error('Data Not Found');
         await res.status(200).json(data);
     } catch (err) {

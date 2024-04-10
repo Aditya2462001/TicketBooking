@@ -30,17 +30,17 @@ const newTicket = require('./routers/newTicket');
 
 app.use('/api/register',register);
 
-app.use('/api/register', login);
+app.use('/api/login', login);
 
-app.use('/api/tickets', newTicket);
+app.use('/api/tickets/new', newTicket);
 
-app.use('api/tickets',allTickets);
+app.use('/api/tickets',allTickets);
 
-app.use('api/ticket',ticket);
+app.use('/api/tickets/',ticket);
 
-app.use('/api/tickets/',deleteTicket);
+app.use('/api/tickets/delete/',deleteTicket);
 
-app.use('/api/tickets/',updateTicket);
+app.use('/api/tickets/update/',updateTicket);
 
 
 app.listen(port, () => {
