@@ -1,0 +1,14 @@
+.carousel-item{
+    background-image: url('../../assets/images/hero-carousel-1.jpg');
+}
+
+:root {
+    --color-default: #364d59;
+    --color-primary: #feb900;
+    --color-secondary: #52565e;
+  }
+
+a {
+    color: var(--color-primary);
+    text-decoration: none !important;
+  }

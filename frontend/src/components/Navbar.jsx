@@ -1,38 +1,30 @@
-import React from 'react'
+import React from 'react';
+import { Link } from 'react-router-dom';
+import './styles/navbar.css';
 
 function Navbar() {
     return (
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="#">BusGo</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNavDropdown">
-                    <ul class="navbar-nav">
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Features</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Pricing</a>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Dropdown link
-                            </a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                <li><a class="dropdown-item" href="#">Action</a></li>
-                                <li><a class="dropdown-item" href="#">Another action</a></li>
-                                <li><a class="dropdown-item" href="#">Something else here</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
+        <header id="header" className="header d-flex align-items-center">
+    <div className="container-fluid container-xl d-flex align-items-center justify-content-between">
+
+      <Link to="/" className="logo d-flex align-items-center">
+        <h1>TicketBooking<span>.</span></h1>
+      </Link>
+
+      <i className="mobile-nav-toggle mobile-nav-show bi bi-list"></i>
+      <i className="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i>
+      <nav id="navbar" className="navbar">
+        <ul>
+          <li><Link to="/" className="active">Home</Link></li>
+          <li><Link to="/">Tickets</Link></li>
+          <li><Link to="/">Search</Link></li>
+          <li><Link to="/">Login</Link></li>
+          <li><Link to="/">Register</Link></li>
+        </ul>
+      </nav>
+
+    </div>
+  </header>
     )
 }
 

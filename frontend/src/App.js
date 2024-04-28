@@ -1,35 +1,42 @@
-import React, {useEffect, useState } from 'react';
-import { BrowserRouter as Router,Routes, Route, Navigate } from "react-router-dom";
-import Register from './pages/Register';
-import Login from './pages/Login';
+import React, { useEffect, useState } from 'react';
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import Home from './pages/Home';
 import Profile from './pages/Profile';
+import './App.css';
 import Ticket from './pages/Ticket';
+import Login from './pages/Login';
+import Register from './pages/Register';
+import { useSelector } from 'react-redux';
 
 const App = () => {
-  const [user, setUser] = useState();
+  const [isLoggedIn,setIsLoggedIn] = useState(false);
 
-  useEffect(() => {
-    if (localStorage.getItem('user-details') !== '') {
-      setUser(JSON.parse(localStorage.getItem('user-details')));
+  const { user } = useSelector((state) => state.auth);
+
+  useEffect(() =>{
+    if(user !== null){
+      setIsLoggedIn(true);
     }
-  }, []);
+  },[user]);
 
   return (
     <Router>
-      {user !== null ? (
-        <Routes>
-              <Route extact path="/" element={<Home />} />
-              <Route path="/ticket/:id" element={<Ticket />} />
-              <Route path="/profile" element={<Profile />} />
-        </Routes>
-      ):(
-        <Routes>
-              <Route extact path="/" element={<Navigate to={'/login'} />} />
-              <Route path="/login" element={<Login />} />
-              <Route path="/register" element={<Register />} />
-        </Routes>
-      )}
+      <Routes>
+        {isLoggedIn ? (
+          <>
+            <Route exact path="/" element={<Home />} />
+            <Route path="/ticket/:id" element={<Ticket />} />
+            <Route path="/profile" element={<Profile />} />
+            <Route exact path="*" element={<Navigate to="/" />} />
+          </>
+        ) : (
+          <>
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="*" element={<Navigate to={'/login'} />} /> 
+          </>
+        )}
+      </Routes>
     </Router>
   )
 }

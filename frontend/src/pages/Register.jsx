@@ -1,85 +1,115 @@
 import React, { useEffect, useState } from 'react';
-import { useDispatch,useSelector } from 'react-redux';
-import { registerFun,resetService } from '../slice/Services';
+import { useDispatch, useSelector } from 'react-redux';
+import { registerFun, resetService } from '../slice/authSlice';
 import { useNavigate } from 'react-router';
+import { Link } from 'react-router-dom';
 
 const Register = () => {
-  const [formData,setFormData] = useState({
-    name:'',
-    email:'',
-    password:''
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    password: ''
   });
 
-  const {isSuccess,isRegister,message} = useSelector((state) => state.auth);
+  const { isRegister, message } = useSelector((state) => state.auth);
 
   const dispatch = useDispatch();
 
   const navigate = useNavigate();
 
-  useEffect(() =>{
-    if(isRegister){
+  useEffect(() => {
+    if (isRegister) {
+      alert(message);
       navigate('/login');
     }
 
-    return () =>{
+    return () => {
       dispatch(resetService());
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[isRegister]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isRegister]);
 
 
-  const handleChange = (e) =>{
-    setFormData((initState) => ({...initState,[e.target.name]:e.target.value}));
+  const handleChange = (e) => {
+    setFormData((initState) => ({ ...initState, [e.target.name]: e.target.value }));
   }
 
-  const handleSubmit = (e) =>{
+  const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(registerFun(formData));
   }
 
   return (
-    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
-      <form onSubmit={handleSubmit} style={{ width: '300px' }}>
-        <h2 style={{ marginBottom: '20px', textAlign: 'center' }}>Register</h2>
-        <div className="form-group">
-          <label htmlFor="name">Name</label>
-          <input
-            type="text"
-            className="form-control"
-            id="name"
-            name="name"
-            value={formData.name}
-            onChange={handleChange}
-            required
-          />
+    <section className="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
+      <div className="container">
+        <div className="row justify-content-center">
+          <div className="col-lg-4 col-md-6 d-flex flex-column align-items-center justify-content-center">
+
+            <div className="card mb-3">
+
+              <div className="card-body">
+
+                <div className="pt-4 pb-2">
+                  <h5 className="card-title text-center pb-0 fs-4">Register in Site</h5>
+                  <p className="text-center small">Enter your details to register</p>
+                </div>
+
+                <form className="row g-3 needs-validation" onSubmit={handleSubmit}>
+
+                  <div className="col-12">
+                    <label htmlFor="yourUsername" className="form-label">Name</label>
+                    <div className="input-group has-validation">
+                      <span className="input-group-text" id="inputGroupPrepend">Mrs/Ms</span>
+                      <input 
+                        type="text" 
+                        name="name" 
+                        className="form-control"
+                        value={formData.name} 
+                        onChange={handleChange}
+                        id="name" 
+                        required />
+                    </div>
+                  </div>
+
+                  <div className="col-12">
+                    <label htmlFor="email" className="form-label">Email</label>
+                    <input 
+                      type="email" 
+                      name="email" 
+                      className="form-control" 
+                      id="email"
+                      value={formData.email}
+                      onChange={handleChange}
+                      required />
+                  </div>
+
+                  <div className="col-12">
+                    <label htmlFor="yourPassword" className="form-label">Password</label>
+                    <input 
+                      type="password" 
+                      name="password" 
+                      className="form-control" 
+                      id="yourPassword" 
+                      value={formData.password}
+                      onChange={handleChange}
+                      required />
+                  </div>
+                  <div className="col-12">
+                    <button className="btn btn-primary w-100" type="submit">Register</button>
+                  </div>
+                  <div className="col-12">
+                    <p className="small mb-0">Already have an account? <Link to="/login">Login</Link></p>
+                  </div>
+                </form>
+
+              </div>
+            </div>
+
+          </div>
         </div>
-        <div className="form-group">
-          <label htmlFor="email">Email address</label>
-          <input
-            type="email"
-            className="form-control"
-            id="email"
-            name="email"
-            value={formData.email}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="password">Password</label>
-          <input
-            type="password"
-            className="form-control"
-            id="password"
-            name="password"
-            value={formData.password}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <button type="submit" className="btn btn-primary btn-block my-4">Register</button>
-      </form>
-    </div>
+      </div>
+
+    </section>
   )
 }
 

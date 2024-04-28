@@ -4,14 +4,14 @@ import services from "./Services";
 const userDetails = localStorage.getItem('user-details');
 
 const initialState = {
-  user: userDetails ? JSON.parse(userDetails) : {},
+  user: userDetails ? JSON.parse(userDetails) : null,
   isSuccess: false,
   isfail: false,
   isRegister: false,
   message: ""
 }
 
-const loginFun = createAsyncThunk('login-fun', async (data, thunkAPI) => {
+export const loginFun = createAsyncThunk('login-fun', async (data, thunkAPI) => {
   try {
     return await services.loginFun(data);
   } catch (error) {
@@ -19,7 +19,7 @@ const loginFun = createAsyncThunk('login-fun', async (data, thunkAPI) => {
   }
 })
 
-const registerFun = createAsyncThunk('register-fun', async (data, thunkAPI) => {
+export const registerFun = createAsyncThunk('register-fun', async (data, thunkAPI) => {
   try {
     return await services.registerFun(data);
   }

@@ -22,6 +22,7 @@ app.use(bodyParser.json());
 // router 
 const register = require('./routers/register');
 const login = require('./routers/login');
+const allUser = require('./routers/allUsers');
 const allTickets = require('./routers/allTickets');
 const deleteTicket = require('./routers/deleteTicket');
 const updateTicket = require('./routers/updateTicket');
@@ -31,6 +32,8 @@ const newTicket = require('./routers/newTicket');
 app.use('/api/register',register);
 
 app.use('/api/login', login);
+
+app.use('/api/all-user', allUser);
 
 app.use('/api/tickets/new', newTicket);
 
